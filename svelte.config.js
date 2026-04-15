@@ -15,10 +15,6 @@ const config = {
 			strict: true
 		})
 	},
-	vitePlugin: {
-		dynamicCompileOptions: ({ filename }) =>
-			filename.includes('node_modules') ? undefined : { runes: true }
-	}
 };
 
 export default config;

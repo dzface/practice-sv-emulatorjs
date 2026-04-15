@@ -3,5 +3,15 @@
     "name":"슈퍼마리오어드벤스4",
     "file":"/roms/sma4.gba",
     "core":"gba"
+  },
+  {
+    "name":"별의커비:거울의 대미궁",
+    "file":"/roms/Kirby - Nightmare in Dream Land (USA).gba",
+    "core":"gba"
+  },
+  {
+    "name":"별의커비:꿈의샘디럭스",
+    "file":"/roms/Hoshi no Kirby - Kagami no Daimeikyuu(ko).gba",
+    "core":"gba"
   }
 ]
