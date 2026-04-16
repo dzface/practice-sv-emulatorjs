@@ -1,11 +1,33 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
+	import { resolve } from '$app/paths';
 
 	let { children } = $props();
 </script>
 
-<svelte:head>
-	<link rel="icon" href={favicon} />
-</svelte:head>
+<svelte:head></svelte:head>
+<nav>
+	<a href={resolve('/')}>홈</a>
+	<a href={resolve('/gba/')}>GBA</a>
+	<a href={resolve('/nds/')}>NDS</a>
+	<a href={resolve('/info')}>정보</a>
+</nav>
 
-{@render children()}
+<hr />
+{#if children}
+	{@render children()}
+{/if}
+<hr />
+
+<style>
+	nav {
+		width: 100vw;
+		& a {
+			color: inherit;
+			text-decoration: double;
+			margin: 0 15px;
+			&:hover {
+				color: blue;
+			}
+		}
+	}
+</style>

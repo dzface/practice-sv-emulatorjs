@@ -1,0 +1,1 @@
+import{_ as e,h as t}from"../chunks/Dv86WNxa.js";import"../chunks/Cfug8aQt.js";var n=e(`<h1>메인페이지 입니다.</h1>`);function r(e){t(e,n())}export{r as component};

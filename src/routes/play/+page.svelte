@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
-
+	import { onDestroy } from 'svelte';
 	// URL 파라미터에서 정보 추출
 	let gameFile = $derived($page.url.searchParams.get('file'));
 	let gameCore = $derived($page.url.searchParams.get('core') || 'gba');
@@ -32,24 +32,56 @@
 			if (container) container.innerHTML = '';
 		};
 	});
+	onDestroy(() => {
+		// 1. 강제 종료 플래그
+		window.EJS_terminate = true;
+
+		// 2. 컨테이너 제거
+		const container = document.getElementById('game-container');
+		if (container) container.innerHTML = '';
+
+		// 3. 스크립트 제거
+		const loader = document.getElementById(SCRIPT_ID);
+		if (loader) loader.remove();
+
+		// 4. iframe까지 강제 제거 (이게 중요)
+		document.querySelectorAll('iframe').forEach(el => el.remove());
+
+		// 5. 전역 변수 제거
+		delete window.EJS_player;
+		delete window.EJS_gameUrl;
+		delete window.EJS_core;
+		delete window.EJS_pathtodata;
+		delete window.EJS_terminate;
+	});
 </script>
 
 <div class="emulator-wrapper">
 	<nav>
-		<a href="{base}/">⬅ 목록으로</a>
+		<a href={`${base}/`} data-sveltekit-reload>⬅ 목록으로</a>
 	</nav>
 	<div id="game-container"></div>
 </div>
 
 <style>
 	.emulator-wrapper {
-		width: 100vw;
-		height: 100vh;
+		width: 98dvw;
+		height: 89dvh;
 		display: flex;
 		flex-direction: column;
 		background: #000;
 	}
-	nav { padding: 10px; background: #222; }
-	nav a { color: #fff; text-decoration: none; font-weight: bold; }
-	#game-container { flex: 1; width: 100%; }
+	nav {
+		padding: 10px;
+		background: #222;
+	}
+	nav a {
+		color: #fff;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	#game-container {
+		flex: 1;
+		width: 100%;
+	}
 </style>
